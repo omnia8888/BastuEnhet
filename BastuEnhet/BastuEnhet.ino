@@ -15,9 +15,9 @@
 
 //Pin nummer konfigurationen som enheterna är
 //inkopplade på
-#define LEDCONTROL_DATA_PIN 12
-#define LEDCONTROL_CLOCK_PIN 11
-#define LEDCONTROL_CS_PIN 10
+//#define LEDCONTROL_DATA_PIN 12
+//#define LEDCONTROL_CLOCK_PIN 11
+//#define LEDCONTROL_CS_PIN 10
 
 #define ONE_WIRE_CONTROL_PIN 4
 
