@@ -1,3 +1,4 @@
+#include <LedControl.h>
 #include <SoftwareSerial.h>
 #include <DallasTemperature.h>
 #include <OneWire.h>
@@ -39,6 +40,8 @@ MickeDallasTemperature mDallasTemp(&oWire);
 
 RS485WithErrChk rs485 = RS485WithErrChk(SSerialRX,SSerialTX,SSerialTxControl);
 SendReciveRemoteTemp sendRecvRTemp(&rs485,NUM_OF_REMOTE_SENSORS,5000);
+
+
 
 //Behövs för att köra Freqcounter
 //interupten nedan
