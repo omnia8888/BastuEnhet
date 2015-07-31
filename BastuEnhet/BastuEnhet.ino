@@ -33,6 +33,9 @@
 //frekvens ska hämtas
 #define  READ_FREQVENCY 1000
 
+//Definerar hur ofta det lägsta värdet från sjö temperaturen ska läsas av.
+#define FREQTEMP_LOW_VALUE_UPDATE_INTERVALL 5000
+
 //Skapa de globala objekten
 
 OneWire oWire(ONE_WIRE_CONTROL_PIN);
@@ -41,7 +44,9 @@ MickeDallasTemperature mDallasTemp(&oWire);
 RS485WithErrChk rs485 = RS485WithErrChk(SSerialRX,SSerialTX,SSerialTxControl);
 SendReciveRemoteTemp sendRecvRTemp(&rs485,NUM_OF_REMOTE_SENSORS,5000);
 
-
+float lowestfreqTemp = 0;
+float currentFreqTemp = 0;
+long lastFreqTempUpdate = 0;
 
 //Behövs för att köra Freqcounter
 //interupten nedan
@@ -81,7 +86,7 @@ void loop()
 	float uteTemp;
 	
 	//Hämta temperatur från FreqCountern
-	sjoTemp = GetTempFromFreqCounter(READ_FREQVENCY);
+	sjoTemp = GetLowestTempFromFreqCounter();
 		
 	//Hämta  temperatur från Dallas sensorn  
 	bastuTemp = mDallasTemp.getSensorTempC(0);
@@ -100,7 +105,41 @@ void loop()
 	
 	String sTemp;
 	sTemp = sendRecvRTemp.checkForRemoteData();
+	Serial.print("Recived request = ");
+	Serial.println(sTemp);
+}
+
+float GetLowestTempFromFreqCounter()
+{
+	float tempFromFreqCount;
+	//Kolla om den körs för första gången i sådant fall hämta och returnera
+	//en temperatur på direktent
+	if (lastFreqTempUpdate == 0) {
+		//Updatera timern
+		Serial.println("Setting freqTempStartValue");
+		lastFreqTempUpdate = millis();
+		tempFromFreqCount = GetTempFromFreqCounter(READ_FREQVENCY);
+		lowestfreqTemp = tempFromFreqCount;
+		return lowestfreqTemp;
+	}
 	
+	if (lastFreqTempUpdate + FREQTEMP_LOW_VALUE_UPDATE_INTERVALL > millis()) {
+		Serial.println("Reading FreqLowVal only");
+		//Tröskel värdet för updaterings intervallet har INTE uppnåtts,
+		//så lägsta freqCount temperaturen ska bara läsas av
+		tempFromFreqCount = GetTempFromFreqCounter(READ_FREQVENCY);
+		if (tempFromFreqCount < lowestfreqTemp) {
+		//om det är lägst sparas undan.
+			lowestfreqTemp = tempFromFreqCount;
+		}
+	}
+	else {
+		//Nytt lägsta värde skall sättas
+		Serial.println("Updating freqTemp Low Value");
+		currentFreqTemp = lowestfreqTemp;
+		lastFreqTempUpdate = millis();
+	}
+	return currentFreqTemp;
 }
 
 //Hämta temperatur från freqCouner

@@ -44,10 +44,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Arduino\arduino-1.6.0-windows\arduino-1.6.0\hardware\arduino\avr\cores\arduino;D:\Arduino\arduino-1.6.0-windows\arduino-1.6.0\hardware\arduino\avr\variants\standard;C:\Users\Börje\Source\Repos\BastuEnhet\BastuEnhet;D:\Arduino\Project\libraries\dallas-temperature-control;D:\Arduino\Project\libraries\dallas-temperature-control\utility;D:\Arduino\Project\libraries\LedControl\src;D:\Arduino\Project\libraries\LedControl\src\utility;D:\Arduino\Project\libraries\OneWire;D:\Arduino\Project\libraries\OneWire\utility;D:\Arduino\arduino-1.6.0-windows\arduino-1.6.0\hardware\arduino\avr\libraries\SoftwareSerial;D:\Arduino\arduino-1.6.0-windows\arduino-1.6.0\hardware\arduino\avr\libraries\SoftwareSerial\utility;D:\Arduino\arduino-1.6.0-windows\arduino-1.6.0\libraries;D:\Arduino\arduino-1.6.0-windows\arduino-1.6.0\hardware\arduino\avr\libraries;C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers;D:\Arduino\Project\libraries;{runtime.tools.avr-gcc.path}/avr/include/;{runtime.tools.avr-gcc.path}//avr/include/avr/;{runtime.tools.avr-gcc.path}/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>C:\Users\Börje\Source\Repos\BastuEnhet\BastuEnhet\Visual Micro\.BastuEnhet.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>c:\Arduino\hardware\arduino\avr\cores\arduino;c:\Arduino\hardware\arduino\avr\variants\standard;D:\Arduino VS2013\BastuEnhet\BastuEnhet;D:\Arduino projects\libraries\DallasTemperature;D:\Arduino projects\libraries\DallasTemperature\utility;D:\Arduino projects\libraries\LedControl;D:\Arduino projects\libraries\LedControl\utility;D:\Arduino projects\libraries\OneWire;D:\Arduino projects\libraries\OneWire\utility;c:\Arduino\hardware\arduino\avr\libraries\SoftwareSerial;c:\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\utility;c:\Arduino\libraries;c:\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers;D:\Arduino projects\libraries;c:\Arduino\hardware\tools\avr/avr/include/;c:\Arduino\hardware\tools\avr//avr/include/avr/;c:\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\Arduino VS2013\BastuEnhet\BastuEnhet\Visual Micro\.BastuEnhet.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=160;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=163;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -90,4 +90,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.port="COM6" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
