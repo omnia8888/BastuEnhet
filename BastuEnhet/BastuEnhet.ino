@@ -98,6 +98,7 @@ void loop()
 	Serial.println(bastuTemp);
 	Serial.print("Ute Temperatur = ");
 	Serial.println(uteTemp);
+	Serial.println();
 	
 	sendRecvRTemp.setTemperatureToSend(0,sjoTemp);
 	sendRecvRTemp.setTemperatureToSend(2,bastuTemp);
@@ -122,23 +123,31 @@ float GetLowestTempFromFreqCounter()
 		lowestfreqTemp = tempFromFreqCount;
 		return lowestfreqTemp;
 	}
-	
+
 	if (lastFreqTempUpdate + FREQTEMP_LOW_VALUE_UPDATE_INTERVALL > millis()) {
-		Serial.println("Reading FreqLowVal only");
+		Serial.print("Tar det sist updaterade lagsta FreqTemp vardet = ");
+		Serial.println(lowestfreqTemp);
 		//Tröskel värdet för updaterings intervallet har INTE uppnåtts,
 		//så lägsta freqCount temperaturen ska bara läsas av
 		tempFromFreqCount = GetTempFromFreqCounter(READ_FREQVENCY);
+
+		Serial.print("Senaste hamtade Sjotemp = ");
+		Serial.println(tempFromFreqCount);
+		//Kolla om den senast hämtade temperaturen från FreqCounter är
+		//Lägre än den hittils lägsta temperaturen.
 		if (tempFromFreqCount < lowestfreqTemp) {
-		//om det är lägst sparas undan.
+			//om det är lägst sparas undan.
 			lowestfreqTemp = tempFromFreqCount;
 		}
 	}
 	else {
-		//Nytt lägsta värde skall sättas
-		Serial.println("Updating freqTemp Low Value");
+		//Tiden har gått över och nytt lägsta värde skall sättas
+		Serial.print("Updaterar sjoTempVardet med det senaste lagsta = ");
+		Serial.println(lowestfreqTemp);
 		currentFreqTemp = lowestfreqTemp;
 		lastFreqTempUpdate = millis();
 	}
+	Serial.println();
 	return currentFreqTemp;
 }
 
